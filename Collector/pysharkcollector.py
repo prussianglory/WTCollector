@@ -44,3 +44,6 @@ class Collector:
             print("Введённое значение не является числом! Пожалуйста, повторите попытку.")
             return False, id
 
+    def start_collecting(self):
+        pass
+
