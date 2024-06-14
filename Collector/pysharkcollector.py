@@ -1,6 +1,8 @@
 import pyshark
 import socket
 from typing import List
+import time
+from pynput.keyboard import Key, Listener
 
 class Collector:
     """
@@ -14,8 +16,10 @@ class Collector:
         print(f"Ваш текущий интерфейс: {self.iface}")
         return self.iface
 
-    # Выбор интерфейса
     def __define_iface(self) -> List[str]:
+        """
+        Выбор сетевого интерфейса для прослушивания
+        """
         valid_flag = False
         ifaces_list = [iface[1] for iface in socket.if_nameindex()]
         print('Выберите интерфейс (введите номер интерфейса):')
@@ -27,8 +31,10 @@ class Collector:
             valid_flag, iface_id = self.__validate_id(iface_id, ifaces_list_size, valid_flag)
         return ifaces_list[iface_id]
     
-    # Валидация введённого идентификатора интерфейса
     def __validate_id(self, id:str, size:int, valid_flag:bool):
+        """
+        Валидация введенного идентификатора сетевого интерфейса
+        """
         is_adv_digit = lambda x: x.isdigit() if x[:1]!='-' else x[1:].isdigit()
         if is_adv_digit(id):
             id = int(id)
