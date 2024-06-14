@@ -14,7 +14,7 @@ class Collector:
         print(f"Ваш текущий интерфейс: {self.iface}")
         return self.iface
 
-
+    # Выбор интерфейса
     def __define_iface(self) -> List[str]:
         valid_flag = False
         ifaces_list = [iface[1] for iface in socket.if_nameindex()]
@@ -27,6 +27,7 @@ class Collector:
             valid_flag, iface_id = self.__validate_id(iface_id, ifaces_list_size, valid_flag)
         return ifaces_list[iface_id]
     
+    # Валидация введённого идентификатора интерфейса
     def __validate_id(self, id:str, size:int, valid_flag:bool):
         is_adv_digit = lambda x: x.isdigit() if x[:1]!='-' else x[1:].isdigit()
         if is_adv_digit(id):
